@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 
 class Home extends StatefulWidget{
@@ -50,6 +50,10 @@ class HomeState extends State<Home> {
                       hintText: 'In Pounds',
                       icon: new Icon(Icons.person_outline)
                     ),
+
+
+
+
                   ),
                     
 
@@ -64,8 +68,6 @@ class HomeState extends State<Home> {
               ),
             )
           ],
-        ),
-      ),
     );
   }
 
