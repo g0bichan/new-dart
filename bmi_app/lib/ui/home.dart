@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 class Home extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
+
     return new HomeState();
   }
+
+
 
 }
 
@@ -24,33 +26,72 @@ class HomeState extends State<Home> {
         child: new ListView(
           padding: const EdgeInsets.all(2.5),
           children: <Widget>[
-            new Image.asset('images/bmi.png',
-            height: 155,
-            width: 225,),
+            new Image.asset("images/bmi.png",
+              height: 144,
+              width: 200,),
 
             new Container(
-              margin: const EdgeInsets.all(2.0),
-              alignment: Alignment.center,
-              child: new Column(
-                children: <Widget>[
-                  new TextField(
-                    controller: null,
-                    keyboardType: TextInputType.number,
-                    decoration: new InputDecoration(
-                        labelText: "Age",
-                        hintText: "age",
-                        icon: new Icon(Icons.person_outline)
+                margin: const EdgeInsets.all(3.0),
+                alignment: Alignment.center,
+                child: new Column(
+                  children: <Widget>[
+                    new TextField(
+                      controller: null,
+                      keyboardType: TextInputType.number,
+                      decoration: new InputDecoration(
+                          labelText: "Age",
+                          icon: new Icon(Icons.person)
+                      ),
                     ),
 
-                  ),
+                    new TextField(
+                      controller: null,
+                      keyboardType: TextInputType.number,
+                      decoration: new InputDecoration(
+                          labelText: "Height In Feet",
+                          icon: new Icon(Icons.accessibility_new)
+                      ),
+                    ),
 
-                ],
-              ),
-            ),
-            ),
+                    new TextField(
+                      controller: null,
+                      keyboardType: TextInputType.number,
+                      decoration: new InputDecoration(
+                          labelText: "Weight In lb",
+                          icon: new Icon(Icons.accessibility_new)
+                      ),
+                    ),
 
+                  new Padding(padding: new EdgeInsets.all(10.5)),
+                    new Center(
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            margin: const EdgeInsets.only(left: 10.0),
+                            child: new RaisedButton(
+                              onPressed: () => debugPrint("Your Weight Is"),
+                              color: Colors.red,
+                              child: new Text("Calculate",
+                              style: new TextStyle(color: Colors.white,
+                              fontSize: 16.9))),
+
+
+                          ),
+                        ],
+                      ),
+
+                      ),
+
+                  ],
+
+                    ),
+
+
+                ),
           ],
-        ),
+            ),
+
+
 
 
       ),
@@ -59,3 +100,4 @@ class HomeState extends State<Home> {
 
 
 }
+
