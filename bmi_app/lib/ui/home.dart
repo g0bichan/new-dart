@@ -7,11 +7,15 @@ class Home extends StatefulWidget{
     return new HomeState();
   }
 
-
-
 }
 
 class HomeState extends State<Home> {
+  final TextEditingController _weightcontroller = new TextEditingController();
+  final TextEditingController _heightcontroller = new TextEditingController();
+  final TextEditingController _agecontroller = new TextEditingController();
+
+
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -36,7 +40,7 @@ class HomeState extends State<Home> {
                 child: new Column(
                   children: <Widget>[
                     new TextField(
-                      controller: null,
+                      controller: _agecontroller,
                       keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
                           labelText: "Age",
@@ -45,7 +49,7 @@ class HomeState extends State<Home> {
                     ),
 
                     new TextField(
-                      controller: null,
+                      controller: _heightcontroller,
                       keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
                           labelText: "Height In Feet",
@@ -54,7 +58,7 @@ class HomeState extends State<Home> {
                     ),
 
                     new TextField(
-                      controller: null,
+                      controller: _weightcontroller,
                       keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
                           labelText: "Weight In lb",
@@ -63,9 +67,9 @@ class HomeState extends State<Home> {
                     ),
 
                   new Padding(padding: new EdgeInsets.all(10.5)),
-                    new Center(
-                      child: new Row(
-                        children: <Widget>[
+            //        new Center(
+                 //     child: new Row(
+                    //    children: <Widget>[
                           new Container(
                             margin: const EdgeInsets.only(left: 10.0),
                             child: new RaisedButton(
@@ -77,10 +81,10 @@ class HomeState extends State<Home> {
 
 
                           ),
-                        ],
-                      ),
+                     //   ],
+                    //  ),
 
-                      ),
+                  //    ),
 
                   ],
 
@@ -100,4 +104,5 @@ class HomeState extends State<Home> {
 
 
 }
+
 
