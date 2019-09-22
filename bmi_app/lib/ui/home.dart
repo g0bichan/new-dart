@@ -13,8 +13,27 @@ class HomeState extends State<Home> {
   final TextEditingController _weightcontroller = new TextEditingController();
   final TextEditingController _heightcontroller = new TextEditingController();
   final TextEditingController _agecontroller = new TextEditingController();
+  double inches = 0.0;
+  double result = 0.0;
+void _calculateBMI(){
+  setState(() {
+    int age = int.parse(_agecontroller.text);
+    double height = double.parse(_heightcontroller.text);
+    inches = height*12;
+    double weight = double.parse(_weightcontroller.text);
+    if ((_agecontroller.text.isNotEmpty || age > 0)
+      && ((_heightcontroller.text.isNotEmpty || inches > 0)
+        &&(_weightcontroller.text.isNotEmpty || weight > 0))) {
+    result = weight / (inches * inches) * 703;
+
+    }else{
+      result = 0.0;
+    }
 
 
+
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +59,7 @@ class HomeState extends State<Home> {
                 child: new Column(
                   children: <Widget>[
                     new TextField(
-                      controller: _agecontroller,
+                      controller: null,
                       keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
                           labelText: "Age",
@@ -49,7 +68,7 @@ class HomeState extends State<Home> {
                     ),
 
                     new TextField(
-                      controller: _heightcontroller,
+                      controller: null,
                       keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
                           labelText: "Height In Feet",
@@ -58,7 +77,7 @@ class HomeState extends State<Home> {
                     ),
 
                     new TextField(
-                      controller: _weightcontroller,
+                      controller: null,
                       keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
                           labelText: "Weight In lb",
@@ -67,24 +86,17 @@ class HomeState extends State<Home> {
                     ),
 
                   new Padding(padding: new EdgeInsets.all(10.5)),
-            //        new Center(
-                 //     child: new Row(
-                    //    children: <Widget>[
                           new Container(
                             margin: const EdgeInsets.only(left: 10.0),
                             child: new RaisedButton(
-                              onPressed: () => debugPrint("Your Weight Is"),
+                              onPressed: _calculateBMI,
                               color: Colors.red,
-                              child: new Text("Calculate",
-                              style: new TextStyle(color: Colors.white,
-                              fontSize: 16.9))),
+                              child: new Text("Calculate"),
+                              textColor: Colors.white,
+                            ),
 
 
                           ),
-                     //   ],
-                    //  ),
-
-                  //    ),
 
                   ],
 
@@ -92,14 +104,33 @@ class HomeState extends State<Home> {
 
 
                 ),
-          ],
+
+            new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Text("BMI : $result",
+                style: new TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.w800,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 19.9
+                ),),
+
+                new Padding(padding: const EdgeInsets.all(5.0))
+              ],
+            ),
+            ),
+
+],
+
             ),
 
 
-
-
-      ),
+  //  ],
     );
+
+    //  );
+
   }
 
 
