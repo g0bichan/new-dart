@@ -27,6 +27,7 @@ void main() async {
               padding: const EdgeInsets.all(16.0),
               itemBuilder: (BuildContext context, int position) {
                 if (position.isOdd) return new Divider();
+                final index = position ~/ 2;
                 return new ListTile(
                   title: new Text("${_data[position]['title']}",
                       style: new TextStyle(fontSize: 18.9)),
@@ -43,12 +44,34 @@ void main() async {
                       "${_data[position]['body'][0].toString().toUpperCase()}",
                       style: new TextStyle(fontSize: 14.4, color: Colors.white),
                     ),
+
+
                   ),
+                  onTap: (){ _showOnTapMessage(context, "${_data[index]['title']}");},
                 );
               })),
     ),
   ));
 }
+
+
+void _showOnTapMessage(BuildContext context, String message) {
+var alert = new AlertDialog(
+  title: new Text('App'),
+  content: new Text(message),
+  actions: <Widget>[
+    new FlatButton(onPressed: (){Navigator.pop(context);},
+        child: new Text('ok'))
+  ],
+
+
+);
+showDialog(context: context, child: alert);
+}
+
+
+
+
 
 Future<List> getJson() async {
   String apiUrl = 'https://jsonplaceholder.typicode.com/posts';
