@@ -3,13 +3,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-void main() async {
-  Map _data = await getQuake();
-  print(_data[1]['Depth']);
 
-  for (int i = 0; i < _data.length; i++) {
-    print(_data[i]['Depth']);
-  }
+
+  Map _data;
+  List _feature;
+void main() async {
+ _data = await getQuake();
+ print(_feature[1]['properties']);
+
 
   runApp(new MaterialApp(
     theme: new ThemeData(primarySwatch: Colors.red),
@@ -20,7 +21,7 @@ void main() async {
         backgroundColor: Colors.red,
       ),
       body: new Center(
-        child: new Text('parsing....'),
+        child: new Text('body....'),
       ),
 
 
@@ -30,7 +31,7 @@ void main() async {
 }
 
 Future<Map>getQuake() async{
-  String apiUrl = 'https://earthquake.usgs.gov/earthquakes/map/';
+  String apiUrl = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson';
   http.Response response = await http.get(apiUrl);
   return json.decode(response.body);
 }
