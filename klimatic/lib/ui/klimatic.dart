@@ -95,6 +95,35 @@ class _KlimaticState extends State<Klimatic> {
   }
 }
 
+
+class ChangeCity extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        backgroundColor: Colors.red,
+        title: new Text(''),
+        centerTitle: true,
+      ),
+      body: new Stack(
+        children: <Widget>[
+          new ListView(
+            children: <Widget>[
+              new Image.asset('images/snow.png',
+              width: 490.0,
+                height: 1200.0,
+                fit: BoxFit.fill,
+              )
+            ],
+          )
+
+        ],
+      ),
+    );
+  }
+}
+
+
 TextStyle cityStyle() {
   return new TextStyle(
       color: Colors.white, fontSize: 22.9, fontStyle: FontStyle.italic);
