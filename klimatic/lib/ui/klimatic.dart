@@ -51,8 +51,8 @@ class _KlimaticState extends State<Klimatic> {
           ),
           new Container(
             margin: const EdgeInsets.fromLTRB(30.0, 290.0, 0.0, 0.0),
-            child: updateTempWidget("chennai"),
-          )
+            child: updateTempWidget('chennai'),
+          ),
         ],
       ),
     );
@@ -76,14 +76,12 @@ class _KlimaticState extends State<Klimatic> {
               child: new Column(
                 children: <Widget>[
                   new ListTile(
-                    title: new Text(
-                      content['main']['temp'].toString(),
-                      style: new TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontSize: 49.9,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500)
-                    ),
+                    title: new Text(content['main']['temp'].toString(),
+                        style: new TextStyle(
+                            fontStyle: FontStyle.normal,
+                            fontSize: 65.9,
+                            color: Colors.green,
+                            fontWeight: FontWeight.w500)),
                   )
                 ],
               ),
@@ -94,35 +92,33 @@ class _KlimaticState extends State<Klimatic> {
         });
   }
 }
-
-
-class ChangeCity extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        backgroundColor: Colors.red,
-        title: new Text(''),
-        centerTitle: true,
-      ),
-      body: new Stack(
-        children: <Widget>[
-          new ListView(
-            children: <Widget>[
-              new Image.asset('images/snow.png',
-              width: 490.0,
-                height: 1200.0,
-                fit: BoxFit.fill,
-              )
-            ],
-          )
-
-        ],
-      ),
-    );
-  }
-}
-
+//
+//class ChangeCity extends StatelessWidget {
+//  @override
+//  Widget build(BuildContext context) {
+//    return new Scaffold(
+//      appBar: new AppBar(
+//        backgroundColor: Colors.red,
+//        title: new Text(''),
+//        centerTitle: true,
+//      ),
+//      body: new Stack(
+//        children: <Widget>[
+//          new ListView(
+//            children: <Widget>[
+//              new Image.asset(
+//                'images/snow.png',
+//                width: 490.0,
+//                height: 1200.0,
+//                fit: BoxFit.fill,
+//              )
+//            ],
+//          )
+//        ],
+//      ),
+//    );
+//  }
+//}
 
 TextStyle cityStyle() {
   return new TextStyle(
