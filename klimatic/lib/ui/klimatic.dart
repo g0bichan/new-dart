@@ -42,7 +42,7 @@ class _KlimaticState extends State<Klimatic> {
             margin: const EdgeInsets.fromLTRB(0.0, 10.9, 20.9, 0.0),
             child: new Text(
               'Spokane',
-              style: new TextStyle(),
+              style: cityStyle(),
             ),
           ),
           new Container(

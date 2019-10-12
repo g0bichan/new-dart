@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../util/utils.dart'as util;
+import '../util/utils.dart' as util;
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
@@ -12,7 +12,7 @@ class Klimatic extends StatefulWidget {
 
 class _KlimaticState extends State<Klimatic> {
   void showStuff() async {
-    Map data = await getWeather(util.appId,util.defaultCity);
+    Map data = await getWeather(util.appId, util.defaultCity);
     print(data.toString());
   }
 
@@ -24,26 +24,25 @@ class _KlimaticState extends State<Klimatic> {
         backgroundColor: Colors.red,
         actions: <Widget>[
           new IconButton(
-            icon: new Icon(Icons.menu),
-            onPressed: ()=> debugPrint("Hey")
-          )
+              icon: new Icon(Icons.menu), onPressed: showStuff)
         ],
       ),
-
       body: new Stack(
         children: <Widget>[
           new Center(
-            child: new Image.asset('images/umbrella.png',
-            width: 490.0,
-            height: 1200.0,
-            fit: BoxFit.fill,
+            child: new Image.asset(
+              'images/umbrella.png',
+              width: 490.0,
+              height: 1200.0,
+              fit: BoxFit.fill,
             ),
           ),
           new Container(
             alignment: Alignment.topRight,
             margin: const EdgeInsets.fromLTRB(0.0, 10.9, 20.9, 0.0),
-            child: new Text('Spokane',
-            style: cityStyle(),
+            child: new Text(
+              'Spokane',
+              style: cityStyle(),
             ),
           ),
           new Container(
@@ -61,47 +60,63 @@ class _KlimaticState extends State<Klimatic> {
   }
 
   Future<Map> getWeather(String appId, String city) async {
-    String apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=${util.appId}&units=imperial';
+    String apiUrl =
+        'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=${util.appId}&units=imperial';
     http.Response response = await http.get(apiUrl);
     return json.decode(response.body);
   }
+
   Widget updateTempWidget(String city) {
     return new FutureBuilder(
-      future: getWeather(util.appId, city),
-        builder: (BuildContext context, AsyncSnapshot<Map> snapshot){
-        if (snapshot.hasData) {
-          Map content = snapshot.data;
-          return new Container(
-            child: new Column(
-              children: <Widget>[
-                new ListTile(
-                  title: new Text(content['main']['temp'].toString()),
-                )
-              ],
-            ),
-          );
+        future: getWeather(util.appId, city),
+//        builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
+//          if (snapshot.hasData) {
+//            Map content = snapshot.data;
+//            return new Container(
+//              child: new Column(
+//                children: <Widget>[
+//                  new ListTile(
+//                    title: new Text(content['main']['temp'].toString(),
+//                        style: new TextStyle(
+//                            fontStyle: FontStyle.normal,
+//                            fontSize: 65.9,
+//                            color: Colors.green,
+//                            fontWeight: FontWeight.w500)),
+//                  )
+//                ],
+//              ),
+//            );
+
+        builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
+          if (snapshot.hasData) {
+            Map content = snapshot.data;
+            return new Container(
+              child: new Column(
+                children: <Widget>[
+                  new ListTile(
+                    title: new Text(content['main']['temp'].toString()),
+                  )
+                ],
+              ),
+            );
+          }
         }
-
-    });
+    );
   }
-
-
-
 }
+
 TextStyle cityStyle() {
   return new TextStyle(
     color: Colors.white,
     fontSize: 22.9,
-    fontStyle: FontStyle.italic,
+    fontStyle: FontStyle.italic
   );
 }
 
 TextStyle tempStyle() {
   return new TextStyle(
-    color: Colors.white,
-    fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.w500,
-    fontSize: 49.0
-  );
+      color: Colors.white,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w500,
+      fontSize: 49.0);
 }
-
