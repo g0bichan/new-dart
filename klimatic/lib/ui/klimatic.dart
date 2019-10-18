@@ -94,11 +94,11 @@ if (result != null && result.containsKey('enter')){
 //                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   new ListTile(
-                    title: new Text(content['main']['temp'].toString(),
+                    title: new Text(content['main']['temp'].toString() + 'F',
                         style: new TextStyle(
                             fontStyle: FontStyle.normal,
                             fontSize: 65.9,
-                            color: Colors.green,
+                            color: Colors.white,
                             fontWeight: FontWeight.w500)),
 
                     subtitle: new ListTile(
