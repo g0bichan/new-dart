@@ -44,7 +44,51 @@ var dbClient = await db;
 int res = await dbClient.insert("$tableUser", user.toMap());
 return res;
 }
+Future<List> getAllUsers() async {
+var dbClient = await db;
+var result = await dbClient.rawQuery("SELECT * FROM $tableUser");
+return result.toList();
+}
+Future<int> getCount() async {
+    var dbClient = await db;
+    return Sqflite.firstIntValue(
+      await dbClient.rawQuery(
+        "SELECT COUNT(*) FROM $tableUser"
+      )
+    );
+
+}
+Future<User> getUser(int id) async {
+    var dbClient = await db;
+    var result = await dbClient.rawQuery("SELECT * FROM $tableUser WHERE $columnId = $id");
+    if (result.length == 0) return null;
+    return new User.fromMap(result.first);
+
+}
+
+Future<int> deleteUser(int id) async {
+    var dbClient = await db;
+    return await dbClient.delete(tableUser,
+    where: "$columnId = ?",whereArgs: [id]);
+}
+
+Future<int> updateUser(User user) async {
+var dbClient = await db;
+return await dbClient.update(tableUser, user.toMap(), where: "$columnId = ?",whereArgs: [user.id]);
+
+}
+
+
+Future close() async {
+    var dbClient = await db;
+    return dbClient.close();
+}
+
 
 
 
 }
+
+
+
+
