@@ -91,17 +91,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: FlatButton(
                     color: Colors.purple,
                     child: Text("signin with email"),
-                    onPressed: () {}),
+                    onPressed: () => _signInWithEmail()),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FlatButton(
                     color: Colors.orange,
                     child: Text("create account"),
-                    onPressed: () {},
+                    onPressed: () => _createUser(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlatButton(
+                  color: Colors.greenAccent,
+                  child: Text("logout"),
+                  onPressed: () => _logout(),
                 ),
               ),
               new Image.network(_imageUrl == null || _imageUrl.isEmpty ?
+              "https://github.com/g0bichan/new-dart/blob/master/firebase_setup/gobi.JPG?raw=true" : _imageUrl
               )
             ],
           ),
@@ -116,6 +125,41 @@ class _MyHomePageState extends State<MyHomePage> {
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
     print("User is: ${user.photoUrl}");
+    setState(() {
+      _imageUrl = user.photoUrl;
+    });
     return user;
+  }
+
+  Future _createUser() async {
+    FirebaseUser user = await _auth.createUserWithEmailAndPassword(
+        email: "gobinath@gmail.com", password: "123456789")
+        .then((usernew) {
+print("user created ${usernew.displayName}");
+print("Email: ${usernew.email}");
+    });
+
+
+
+  }
+
+  _logout() {
+    setState(() {
+      _googleSignIn.signOut();
+      _imageUrl = null;
+    });
+
+
+  }
+
+  _signInWithEmail() {
+    _auth.createUserWithEmailAndPassword(email: "gobinath@gmail.com", password: "123456789" )
+    .catchError((error){
+      print("Something Went Worng! ${error.toString()}");
+    }
+    )
+        .then((newUser){
+print("User signed in: ${newUser.email}");
+    });
   }
 }
